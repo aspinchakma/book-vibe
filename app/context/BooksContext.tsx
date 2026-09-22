@@ -17,8 +17,10 @@ export interface Book {
 }
 interface BooksContextType {
   books: Book[];
-  handleReadBooks: (books: Book) => void;
+  handleReadBooks: (book: Book) => void;
   readBooks: Book[];
+  handleWishlistBooks: (book: Book) => void;
+  wishlist: Book[];
 }
 
 export const BooksContextAPI = createContext<BooksContextType | undefined>(
@@ -34,6 +36,7 @@ const BooksContext = ({
 }) => {
   const [books, setBooks] = useState<Book[]>(booksData);
   const [readBooks, setReadBooks] = useState<Book[]>([]);
+  const [wishlist, setWishlist] = useState<Book[]>([]);
 
   const handleReadBooks = (book: Book): void => {
     const result = readBooks.filter((bk) => bk.bookId === book.bookId);
@@ -44,8 +47,25 @@ const BooksContext = ({
     }
   };
 
+  const handleWishlistBooks = (book: Book): void => {
+    const result = wishlist.filter((bk) => bk.bookId === book.bookId);
+    if (result.length === 0) {
+      setWishlist([...wishlist, book]);
+    } else {
+      alert("Already Added!");
+    }
+  };
+
   return (
-    <BooksContextAPI.Provider value={{ books, handleReadBooks, readBooks }}>
+    <BooksContextAPI.Provider
+      value={{
+        books,
+        handleReadBooks,
+        readBooks,
+        handleWishlistBooks,
+        wishlist,
+      }}
+    >
       {children}
     </BooksContextAPI.Provider>
   );

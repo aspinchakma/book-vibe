@@ -1,5 +1,6 @@
 "use client";
 
+import WishListButton from "@/app/components/WishListButton";
 import { Book, BooksContextAPI } from "@/app/context/BooksContext";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -114,9 +115,8 @@ const BookDetails = () => {
           >
             Read
           </button>
-          <button className="px-7 py-3 bg-[#50B1C9] text-white rounded-xl font-semibold hover:bg-[#3ea0b8] transition">
-            Wishlist
-          </button>
+
+          <WishListButton book={book} />
         </div>
       </div>
     </div>
