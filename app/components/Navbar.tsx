@@ -1,47 +1,75 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
+
   return (
-    <div className="border flex items-center justify-between py-4">
-      <h3 className="text-2xl font-bold">Book Vibe</h3>
-      <ul className="flex items-center gap-4 ">
-        <li>
-          <Link
-            href="/"
-            className={`${pathname === "/" ? "font-bold text-green-700" : ""}`}
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/listedBooks"
-            className={`${pathname === "/listedBooks" ? "font-bold text-green-700" : ""}`}
-          >
-            Listed Books
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/pageToRead"
-            className={`${pathname === "/pageToRead" ? "font-bold text-green-700" : ""}`}
-          >
-            Page To Read
-          </Link>
-        </li>
-      </ul>
-      <div className="flex gap-3 items-center text-sm font-bold">
-        <button className=" text-white bg-green-600 px-6 py-3 rounded-md">
-          Sign In
-        </button>
-        <button className=" text-white bg-sky-600 px-6 py-3 rounded-md">
-          Sign Up
-        </button>
+    <nav className="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/">
+          <h3 className="text-3xl font-bold text-white">
+            Book<span className="text-amber-500">Vibe</span>
+          </h3>
+        </Link>
+
+        {/* Navigation */}
+        <ul className="flex items-center gap-8 text-sm font-medium">
+          <li>
+            <Link
+              href="/"
+              className={`transition duration-300 hover:text-amber-500 ${
+                pathname === "/"
+                  ? "text-amber-500 font-semibold"
+                  : "text-slate-300"
+              }`}
+            >
+              Home
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/listedBooks"
+              className={`transition duration-300 hover:text-amber-500 ${
+                pathname === "/listedBooks"
+                  ? "text-amber-500 font-semibold"
+                  : "text-slate-300"
+              }`}
+            >
+              Listed Books
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/pageToRead"
+              className={`transition duration-300 hover:text-amber-500 ${
+                pathname === "/pageToRead"
+                  ? "text-amber-500 font-semibold"
+                  : "text-slate-300"
+              }`}
+            >
+              Pages To Read
+            </Link>
+          </li>
+        </ul>
+
+        {/* Buttons */}
+        <div className="flex items-center gap-3">
+          <button className="px-6 py-3 rounded-lg border border-slate-700 text-slate-300 hover:border-amber-500 hover:text-amber-500 transition duration-300">
+            Sign In
+          </button>
+
+          <button className="px-6 py-3 rounded-lg bg-amber-500 text-black font-semibold hover:bg-amber-400 transition duration-300">
+            Sign Up
+          </button>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
