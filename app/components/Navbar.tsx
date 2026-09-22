@@ -7,13 +7,13 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-slate-950 border-b border-slate-800 sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 bg-gray-200 backdrop-blur-md border-b border-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <h3 className="text-3xl font-bold text-white">
-            Book<span className="text-amber-500">Vibe</span>
-          </h3>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Book<span className="text-gray-500">Vibe</span>
+          </h2>
         </Link>
 
         {/* Navigation */}
@@ -21,10 +21,10 @@ const Navbar = () => {
           <li>
             <Link
               href="/"
-              className={`transition duration-300 hover:text-amber-500 ${
+              className={`transition-all duration-300 ${
                 pathname === "/"
-                  ? "text-amber-500 font-semibold"
-                  : "text-slate-300"
+                  ? "text-gray-900 font-bold"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               Home
@@ -34,10 +34,10 @@ const Navbar = () => {
           <li>
             <Link
               href="/listedBooks"
-              className={`transition duration-300 hover:text-amber-500 ${
+              className={`transition-all duration-300 ${
                 pathname === "/listedBooks"
-                  ? "text-amber-500 font-semibold"
-                  : "text-slate-300"
+                  ? "text-gray-900 font-bold"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               Listed Books
@@ -47,10 +47,10 @@ const Navbar = () => {
           <li>
             <Link
               href="/pageToRead"
-              className={`transition duration-300 hover:text-amber-500 ${
+              className={`transition-all duration-300 ${
                 pathname === "/pageToRead"
-                  ? "text-amber-500 font-semibold"
-                  : "text-slate-300"
+                  ? "text-gray-900 font-bold"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               Pages To Read
@@ -60,11 +60,11 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className="flex items-center gap-3">
-          <button className="px-6 py-3 rounded-lg border border-slate-700 text-slate-300 hover:border-amber-500 hover:text-amber-500 transition duration-300">
+          <button className="px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 hover:border-gray-900 hover:text-gray-900 transition">
             Sign In
           </button>
 
-          <button className="px-6 py-3 rounded-lg bg-amber-500 text-black font-semibold hover:bg-amber-400 transition duration-300">
+          <button className="px-5 py-2.5 rounded-lg bg-gray-900 text-white font-medium hover:bg-gray-700 transition">
             Sign Up
           </button>
         </div>
