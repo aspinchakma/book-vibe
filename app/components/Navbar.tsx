@@ -35,7 +35,8 @@ const Navbar = () => {
             <Link
               href="/listedBooks"
               className={`transition-all duration-300 ${
-                pathname === "/listedBooks"
+                pathname === "/listedBooks" ||
+                pathname === "/listedBooks/wishlistBooks"
                   ? "text-gray-900 font-bold"
                   : "text-gray-600 hover:text-gray-900"
               }`}
