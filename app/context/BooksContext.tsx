@@ -17,6 +17,8 @@ export interface Book {
 }
 interface BooksContextType {
   books: Book[];
+  handleReadBooks: (books: Book) => void;
+  readBooks: Book[];
 }
 
 export const BooksContextAPI = createContext<BooksContextType | undefined>(
@@ -30,10 +32,20 @@ const BooksContext = ({
   children: React.ReactNode;
   booksData: Book[];
 }) => {
-  const [books, setBooks] = useState(booksData);
+  const [books, setBooks] = useState<Book[]>(booksData);
+  const [readBooks, setReadBooks] = useState<Book[]>([]);
+
+  const handleReadBooks = (book: Book): void => {
+    const result = readBooks.filter((bk) => bk.bookId === book.bookId);
+    if (result.length === 0) {
+      setReadBooks([...readBooks, book]);
+    } else {
+      alert("Already Added!");
+    }
+  };
 
   return (
-    <BooksContextAPI.Provider value={{ books }}>
+    <BooksContextAPI.Provider value={{ books, handleReadBooks, readBooks }}>
       {children}
     </BooksContextAPI.Provider>
   );

@@ -1,16 +1,24 @@
 "use client";
 
-import { BooksContextAPI } from "@/app/context/BooksContext";
+import { Book, BooksContextAPI } from "@/app/context/BooksContext";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useContext } from "react";
 
 const BookDetails = () => {
-  const data = useContext(BooksContextAPI);
-  const books = data?.books;
-  const params = useParams();
+  const context = useContext(BooksContextAPI);
+  const params = useParams<{ bookId: string }>();
+  if (!context) {
+    return <p>Loading</p>;
+  }
+  const { books, handleReadBooks } = context;
+
   const id = params.bookId;
-  const book = books?.find((bk) => bk.bookId === Number(id));
+  const book = books.find((bk: Book) => bk.bookId === Number(id));
+
+  if (!book) {
+    return <p>Book Not Found</p>;
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
@@ -100,7 +108,10 @@ const BookDetails = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4 mt-4">
-          <button className="px-7 py-3 border border-gray-300 rounded-xl font-semibold text-gray-900 hover:bg-gray-50 transition">
+          <button
+            onClick={() => handleReadBooks(book)}
+            className="px-7 py-3 border border-gray-300 rounded-xl font-semibold text-gray-900 hover:bg-gray-50 transition"
+          >
             Read
           </button>
           <button className="px-7 py-3 bg-[#50B1C9] text-white rounded-xl font-semibold hover:bg-[#3ea0b8] transition">
