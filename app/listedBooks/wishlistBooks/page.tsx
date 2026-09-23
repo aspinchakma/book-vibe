@@ -6,12 +6,12 @@ import { useContext } from "react";
 const WishListBooksPage = () => {
   const context = useContext(BooksContextAPI);
   if (!context) return <p>context problem</p>;
-  const { wishlist } = context;
+  const { sortedWishListBooks } = context;
   return (
     <div>
-      {wishlist.length ? (
+      {sortedWishListBooks.length ? (
         <div>
-          {wishlist.map((book) => (
+          {sortedWishListBooks.map((book) => (
             <ReadBookDetails key={book.bookId} book={book} />
           ))}
         </div>

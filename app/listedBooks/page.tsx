@@ -8,13 +8,12 @@ const ListedBooksPage = () => {
   if (!context) {
     return <p>Loading</p>;
   }
-  const { readBooks } = context;
-  console.log(readBooks.length);
+  const { sortedReadBooks } = context;
   return (
     <div>
-      {readBooks.length ? (
+      {sortedReadBooks.length ? (
         <div>
-          {readBooks.map((book: Book) => (
+          {sortedReadBooks.map((book: Book) => (
             <ReadBookDetails key={book.bookId} book={book} />
           ))}
         </div>

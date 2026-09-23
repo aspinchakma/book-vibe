@@ -15,12 +15,16 @@ export interface Book {
   publisher: string;
   yearOfPublishing: number;
 }
+type SortOption = "rating" | "year" | "pages";
 interface BooksContextType {
   books: Book[];
   handleReadBooks: (book: Book) => void;
   readBooks: Book[];
   handleWishlistBooks: (book: Book) => void;
   wishlist: Book[];
+  handleSorts: (value: SortOption) => void;
+  sortedReadBooks: Book[];
+  sortedWishListBooks: Book[];
 }
 
 export const BooksContextAPI = createContext<BooksContextType | undefined>(
@@ -37,6 +41,7 @@ const BooksContext = ({
   const [books, setBooks] = useState<Book[]>(booksData);
   const [readBooks, setReadBooks] = useState<Book[]>([]);
   const [wishlist, setWishlist] = useState<Book[]>([]);
+  const [sortedValue, setSortedValue] = useState<SortOption>("rating");
 
   const handleReadBooks = (book: Book): void => {
     const result = readBooks.filter((bk) => bk.bookId === book.bookId);
@@ -56,6 +61,23 @@ const BooksContext = ({
     }
   };
 
+  const handleSorts = (value: SortOption): void => {
+    setSortedValue(value);
+  };
+  const sortsBooks = (books: Book[]) => {
+    const sortedBooks = [...books];
+    if (sortedValue === "rating") {
+      sortedBooks.sort((a, b) => b.rating - a.rating);
+    } else if (sortedValue === "pages") {
+      sortedBooks.sort((a, b) => a.totalPages - b.totalPages);
+    } else if (sortedValue === "year") {
+      sortedBooks.sort((a, b) => a.yearOfPublishing - b.yearOfPublishing);
+    }
+    return sortedBooks;
+  };
+  const sortedReadBooks = sortsBooks(readBooks);
+  const sortedWishListBooks = sortsBooks(wishlist);
+
   return (
     <BooksContextAPI.Provider
       value={{
@@ -64,6 +86,9 @@ const BooksContext = ({
         readBooks,
         handleWishlistBooks,
         wishlist,
+        handleSorts,
+        sortedReadBooks,
+        sortedWishListBooks,
       }}
     >
       {children}
